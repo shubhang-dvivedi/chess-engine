@@ -4,13 +4,15 @@ function convertFen(fen_notation){
     const fen_array = fen_notation.trim().split(' ');
     const fen_board = fen_array[0].split('/');
     const board_meta_data = fen_array.slice(1,fen_array.length);
-    const row = 0;
-    const bool_board  = [];
-    const char_board = [];
-
+    let row = 0;
+    let bool_board  = [];
+    let char_board = [];
+    let bool_col = [];
+    let char_col = [];
+    
     while (row != 8){
-        let bool_col = [];
-        let char_col = []
+        bool_col = [];
+        char_col = [];
         for (let i = 0; i < fen_board[row].length; i++){
             if (/^\d$/.test(fen_board[row][i])){
                 for (let j = 0; j < parseInt(fen_board[row][i]); j++){
@@ -19,13 +21,17 @@ function convertFen(fen_notation){
                 }
             }
             else{
-                bool_col.push(True);
+                bool_col.push(true);
                 char_col.push(fen_board[row][i]);
             }
         }
         bool_board.push(bool_col);
         char_board.push(char_col);
-        row++;
+        row = row + 1;
     }
+    console.log(bool_board);
+    console.log(char_board);
     return [bool_board, char_board, board_meta_data];
 }
+str = "8/8/8/4p1K1/2k1P3/8/8/8 b - - 0 1"
+convertFen(str);
