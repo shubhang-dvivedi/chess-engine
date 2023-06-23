@@ -2,16 +2,33 @@
 function rules(position, piece_coordinate, target_coordinate){}
 function evaluatePosition(position){}
 
-function isGameOver(position, player){}
+function isGameOver(position, player){
+    const white_player = (player == 'w') ? true : false;
+    for (let i = 0; i < 8; i++){
+        for (let j = 0; j < 8; j++){
+            let piece = position[i][j];
+            if ((white_player && piece === toUpperCase(piece)) || (!white_player && piece === toLowerCase(piece))){
+                for (let m = 0; m < 8; m++){
+                    for (let n = 0; n < 8; n++){
+                        if (rules(position, [i,j], [m,n])) {
+                            return false; // CORNER CASE: check for if the game is draw
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
 
 function findAllMoves(position, player){
     const white_player = (player == 'w') ? true : false;
     const all_moves = [];
     // traverse the board to find all pieces
+    // if white to play and piece is white, or black to play and piece is black, check for all possible moves
     for (let i = 0; i < 8; i++){
         for (let j = 0; j < 8; j++){
             let piece = position[i][j];
-            // if white to play and piece is white, or black to play and piece is black, check for all possible moves
             if ((white_player && piece === toUpperCase(piece)) || (!white_player && piece === toLowerCase(piece))){
                 for (let m = 0; m < 8; m++){
                     for (let n = 0; n < 8; n++){
@@ -46,7 +63,7 @@ function minimax(depth, position, white_player, alpha, beta){
         let new_positions = findAllMoves(position, white_player);
         for (let new_pos of new_positions){
             let eval = minimax(depth-1, new_pos, false, alpha, beta);
-            if (eval[0] > max_eval[0]) max_eval = eval;
+            if (eval[0] > max_eval[0]) max_eval = [eval[0], new_pos];
             alpha = max(alpha, eval[0]);
             if (beta <= alpha){
                 break;
@@ -58,7 +75,7 @@ function minimax(depth, position, white_player, alpha, beta){
         let new_positions = findAllMoves(position, white_player);
         for (let new_pos of new_positions){
             let eval = minimax(depth-1, new_pos, true, alpha, beta);
-            if (eval[0] < min_eval[0]) min_eval = eval;
+            if (eval[0] < min_eval[0]) min_eval = [eval[0], new_pos];
             beta = min(beta, eval[0]);
             if (beta <= alpha){
                 break;
@@ -68,7 +85,9 @@ function minimax(depth, position, white_player, alpha, beta){
     }
 }
 
-function computeNextMove(position, depth, player){
+// computes the next best move
+// takes INPUT positions, depth of search, player to move and RETURNS position after best possible move
+function computeNextMove(position, depth = 2, player){
     let white_player = (player == 'w') ? true : false;
     let alpha = -1e9;
     let beta = 1e9;
