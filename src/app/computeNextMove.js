@@ -4,7 +4,7 @@ function rules(position, piece_coordinate, target_coordinate){}
 // INPUT board position and RETURNS the evaluation of the board
 // evaluation parameters: piece points. (add more parameters)
 function evaluatePosition(position){
-    const piece_points = {'p':100,'P':100,'b':300,'B':300,'n':300,'N':300,'r':500,'R':500,'q':900,'Q':900,'k':0,'K':0};
+    const piece_points = {'p':100,'P':100,'b':300,'B':300,'n':300,'N':300,'r':500,'R':500,'q':900,'Q':900,'k':1000,'K':1000};
     let white_points = 0;
     let black_points = 0;
     for (let i = 0; i < 8; i++){
