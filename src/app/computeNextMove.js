@@ -35,6 +35,7 @@ function findAllMoves(position, player){
                         if (rules(position, [i,j], [m,n])) {
                             let temp = position; // if (piece == 'K' && Math.abs(j-n) == 2){} // CORNER CASE: check for castling since 2 pieaces are moved
                             temp[m][n] = temp[i][j];
+                            temp[i][j] = '';
                             all_moves.push(temp);
                         }
                     }
