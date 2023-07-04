@@ -1,4 +1,5 @@
 import { evaluateBoard } from './evaluateBoard.js';
+import { Chess } from 'chess.js';
 
 // functions to be implemented
 function rules(board, piece_position, target_position){}
@@ -64,22 +65,25 @@ function findAllMoves(board, player){
 // nextBestMove uses minimax algo and alpha beta pruning to compute best possible move.
 // INPUT search depth, board board, player to move, alpha and beta (parameters for alpha beta pruning)
 // RETURNS an array which consists of [board evaluation after search depth if next best move played, board board after next best move]
-function nextBestMove(depth, board, player, alpha, beta){
+function nextBestMove(depth, fen, player, alpha, beta){
     const white_player = (player == 'w') ? true : false;
-    if (isGameOver(board, (white_player)?'w':'b' )){
+    if (isGameOver(fen, player)){
         if (white_player){
-            return [-1e9, board];
+            return [-1e9, fen];
         } else {
-            return [1e9, board];
+            return [1e9, fen];
         }
     }
     if (depth == 0){
-        return [evaluateBoard(board), board];
+        return [evaluateBoard(fen), fen];
     }
 
-    if (white_player){
+    if (white_player) {
         max_eval = -1e9;
-        let new_boards = findAllMoves(board, white_player);
+            let board = new Chess(fen); 
+
+        // let new_boards = findAllMoves(board, white_player);
+        // let new_board = 
         for (let new_pos of new_boards){
             let evaluation = nextBestMove(depth-1, new_pos, false, alpha, beta);
             if (evaluation[0] > max_eval[0]) max_eval = [evaluation[0], new_pos];
@@ -89,7 +93,7 @@ function nextBestMove(depth, board, player, alpha, beta){
             }
         }
         return max_eval;
-    } else{
+    } else {
         min_eval = 1e9;
         let new_boards = findAllMoves(board, white_player);
         for (let new_pos of new_boards){
@@ -105,11 +109,11 @@ function nextBestMove(depth, board, player, alpha, beta){
 }
 
 // computes the next best move
-// takes INPUT boards, depth of search, player to move and RETURNS board board after next move
+// takes INPUT boards, depth of search, player (either 'w' or 'b') to move and RETURNS board board after next move
 // the next move generated is currently finding the next best possible move
-export function computeNextMove(board, depth = 2, player){
+export function computeNextMove(fen, depth = 2, player){
     let alpha = -1e9;
     let beta = 1e9;
-    const next_move = nextBestMove(depth, board, player, alpha, beta)[1];
+    const next_move = nextBestMove(depth, fen, player, alpha, beta)[1];
     return next_move;
 }
