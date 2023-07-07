@@ -106,7 +106,8 @@ function totalPiecePoints(board){
 
 // INPUT board board and RETURNS the evaluation of the board
 // evaluation parameters: piece points, board of piece on board (add more parameters)
-export function evaluateBoard(board){
+export function evaluateBoard(fen){
+    let board = convertFen(fen)[0];    
     let final_eval = 0;
     final_eval += totalPiecePoints(board);
 }

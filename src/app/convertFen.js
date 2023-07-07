@@ -1,4 +1,5 @@
-// the function takes in fen notation and returns an array consisting of [char_board, board_meta_data]
+// INPUT fen notation
+// RETURN array consisting of [char_board, board_meta_data]
 // board_meta_data is an array which consists of [next player, castleable positions, en passant positions, half moves count, total moves count]
 function convertFen(fen_notation){
     const fen_array = fen_notation.trim().split(' ');
@@ -26,5 +27,3 @@ function convertFen(fen_notation){
     console.log(char_board);
     return [char_board, board_meta_data];
 }
-str = "8/8/8/4p1K1/2k1P3/8/8/8 b - - 0 1"
-convertFen(str);

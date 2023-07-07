@@ -67,7 +67,13 @@ function findAllMoves(board, player){
 // RETURNS an array which consists of [board evaluation after search depth if next best move played, board board after next best move]
 function nextBestMove(depth, fen, player, alpha, beta){
     const white_player = (player == 'w') ? true : false;
-    if (isGameOver(fen, player)){
+    // let new_boards = findAllMoves(board, white_player);
+    let board = new Chess(fen);
+    // if (isGameOver(board, player)){
+    if (board.isGameOver()){
+        if (board.isStalemate() || board.isThreefoldRepetition()){
+            return 0;
+        }
         if (white_player){
             return [-1e9, fen];
         } else {
@@ -77,15 +83,12 @@ function nextBestMove(depth, fen, player, alpha, beta){
     if (depth == 0){
         return [evaluateBoard(fen), fen];
     }
-
+        
+    let new_boards = board.moves({ verbose: true});
     if (white_player) {
         max_eval = -1e9;
-            let board = new Chess(fen); 
-
-        // let new_boards = findAllMoves(board, white_player);
-        // let new_board = 
         for (let new_pos of new_boards){
-            let evaluation = nextBestMove(depth-1, new_pos, false, alpha, beta);
+            let evaluation = nextBestMove(depth-1, new_pos[after], false, alpha, beta);
             if (evaluation[0] > max_eval[0]) max_eval = [evaluation[0], new_pos];
             alpha = max(alpha, evaluation[0]);
             if (beta <= alpha){
@@ -95,9 +98,8 @@ function nextBestMove(depth, fen, player, alpha, beta){
         return max_eval;
     } else {
         min_eval = 1e9;
-        let new_boards = findAllMoves(board, white_player);
         for (let new_pos of new_boards){
-            let evaluation = nextBestMove(depth-1, new_pos, true, alpha, beta);
+            let evaluation = nextBestMove(depth-1, new_pos[after], true, alpha, beta);
             if (evaluation[0] < min_eval[0]) min_eval = [evaluation[0], new_pos];
             beta = min(beta, evaluation[0]);
             if (beta <= alpha){
@@ -109,7 +111,8 @@ function nextBestMove(depth, fen, player, alpha, beta){
 }
 
 // computes the next best move
-// takes INPUT boards, depth of search, player (either 'w' or 'b') to move and RETURNS board board after next move
+// INPUT boards, depth of search, player (either 'w' or 'b') to move
+// RETURNS board after next move
 // the next move generated is currently finding the next best possible move
 export function computeNextMove(fen, depth = 2, player){
     let alpha = -1e9;
@@ -117,3 +120,6 @@ export function computeNextMove(fen, depth = 2, player){
     const next_move = nextBestMove(depth, fen, player, alpha, beta)[1];
     return next_move;
 }
+
+let fen = '4k3/4P3/4K3/8/8/8/8/8 b - - 0 78';
+console.log(computeNextMove(fen, 2, 'w'));
