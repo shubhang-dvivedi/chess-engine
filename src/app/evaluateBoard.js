@@ -1,3 +1,5 @@
+import { convertFen } from './convertFen.js';
+
 function pieceHeatMap(board, piece, position){
     const pawn_map =
     [[0,0,0,0,0,0,0,0],
@@ -61,10 +63,10 @@ function pieceHeatMap(board, piece, position){
 
     let x = position[0];
     let y = position[1];
-    if (piece === piece.toLowerCase){
+    if (piece === piece.toLowerCase()){
         x = 7-x;
     }
-    switch(toUpperCase(piece)){
+    switch(piece.toUpperCase()){
         case 'P':
             return pawn_map[x][y];
         case 'N':
@@ -91,7 +93,7 @@ function totalPiecePoints(board){
         for (let j = 0; j < 8; j++){
             if (board[i][j] != ''){
                 let piece = board[i][j];
-                if (piece === toUpperCase(piece)){
+                if (piece === piece.toUpperCase()){
                     white_points += piece_points[piece];
                     white_points += pieceHeatMap(board, piece, [i,j]);
                 } else {
@@ -110,4 +112,5 @@ export function evaluateBoard(fen){
     let board = convertFen(fen)[0];    
     let final_eval = 0;
     final_eval += totalPiecePoints(board);
+    return final_eval;
 }
