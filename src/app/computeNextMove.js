@@ -115,9 +115,9 @@ export function computeNextMove(fen, depth = 3, player){
     let alpha = -1e9;
     let beta = 1e9;
     const next_move = nextBestMove(depth, fen, player, alpha, beta)[1];
-    console.log("check 2: ", next_move);
+    // console.log("next move: ", next_move);
     return next_move;
 }
 
-const fen = '8/R5p1/1N4k1/4p3/2b1P2B/P4K1P/1r3PP1/8 b - - 0 1';
-console.log("next move played: ", computeNextMove(fen, 3, 'w'));
+// const fen = '8/R5p1/1N4k1/4p3/2b1P2B/P4K1P/1r3PP1/8 b - - 0 1';
+// console.log("next move played: ", computeNextMove(fen, 3, 'w'));
