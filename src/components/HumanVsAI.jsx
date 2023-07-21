@@ -57,9 +57,7 @@ const HumanVsAI = ({ playAs }) => {
           setGameOver(true);
           return;
         }
-        // const aiMove1 = nextBestMove(3, fen, player, -Infinity, Infinity); // Call your AI function here
         const aiMove = computeNextMove(3, fen); // Call your AI function here
-        // console.log("move1: "+aiMove1);
         console.log("move2: "+aiMove);
         try {
           const move = chess.move(aiMove[1]);
