@@ -69,15 +69,12 @@ function findAllMoves(board, player) {
 // INPUT search depth, board board, player to move, alpha and beta (parameters for alpha beta pruning)
 // RETURNS an array which consists of [board evaluation after search depth if next best move played, board board after next best move]
 export function nextBestMove(depth, fen, player, alpha, beta) {
-  const white_player = player == "w" ? true : false;
-  // let new_boards = findAllMoves(board, white_player);
   const board = new Chess(fen);
-  // if (isGameOver(board, player)){
   if (board.isGameOver()) {
     if (board.isStalemate() || board.isThreefoldRepetition()) {
       return 0;
     }
-    if (white_player) {
+    if (player) {
       return [-1e9, fen];
     } else {
       return [1e9, fen];
@@ -88,13 +85,13 @@ export function nextBestMove(depth, fen, player, alpha, beta) {
   }
 
   let new_boards = board.moves({ verbose: true });
-  if (white_player) {
+  if (player) {
     let max_eval = [-1e9];
     for (let new_pos of new_boards) {
       let evaluation = nextBestMove(
         depth - 1,
         new_pos["after"],
-        "b",
+        !player,
         alpha,
         beta
       );
@@ -111,7 +108,7 @@ export function nextBestMove(depth, fen, player, alpha, beta) {
       let evaluation = nextBestMove(
         depth - 1,
         new_pos["after"],
-        "w",
+        !player,
         alpha,
         beta
       );
@@ -129,13 +126,10 @@ export function nextBestMove(depth, fen, player, alpha, beta) {
 // INPUT boards, depth of search, player (either 'w' or 'b') to move
 // RETURNS board after next move
 // the next move generated is currently finding the next best possible move
-// export function computeNextMove(fen, depth = 3, player){
-//     let alpha = -1e9;
-//     let beta = 1e9;
-//     const next_move = nextBestMove(depth, fen, player, alpha, beta)[1];
-//     // console.log("next move: ", next_move);
-//     return next_move;
-// }
-
-// const fen = '8/R5p1/1N4k1/4p3/2b1P2B/P4K1P/1r3PP1/8 b - - 0 1';
-// console.log("next move played: ", computeNextMove(fen, 3, 'w'));
+export function computeNextMove(depth = 3, fen){
+    const fen_array = fen.split(" ");
+    const player = (fen_array[1] == "w");
+    // @feet add an if statement here to call the opening function
+    const next_move = nextBestMove(depth, fen, player, -Infinity, Infinity);
+    return next_move;
+}

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Chessboard from "chessboardjsx";
 import { Chess } from "chess.js";
 import { nextBestMove } from "@/app/computeNextMove";
+import { computeNextMove } from "@/app/computeNextMove";
+
 
 const HumanVsAI = ({ playAs }) => {
   let orient = "";
@@ -16,7 +18,7 @@ const HumanVsAI = ({ playAs }) => {
   const [fen, setFen] = useState(chess.fen());
   const [squareStyles, setSquareStyles] = useState({});
   const [gameOver, setGameOver] = useState(false);
-  const [player, setPlayer] = useState(playAs);
+  const [player, setPlayer] = useState(true);
 
   const handleMove = ({ sourceSquare, targetSquare }) => {
     if (gameOver || player !== playAs) return;
@@ -56,7 +58,10 @@ const HumanVsAI = ({ playAs }) => {
           setGameOver(true);
           return;
         }
-        const aiMove = nextBestMove(3, fen, "b", -Infinity, Infinity); // Call your AI function here
+        // const aiMove1 = nextBestMove(3, fen, player, -Infinity, Infinity); // Call your AI function here
+        const aiMove = computeNextMove(3, fen); // Call your AI function here
+        // console.log("move1: "+aiMove1);
+        console.log("move2: "+aiMove);
         try {
           const move = chess.move(aiMove[1]);
           setSquareStyles({
