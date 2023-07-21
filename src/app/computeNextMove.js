@@ -68,7 +68,7 @@ function findAllMoves(board, player) {
 // nextBestMove uses minimax algo and alpha beta pruning to compute best possible move.
 // INPUT search depth, board board, player to move, alpha and beta (parameters for alpha beta pruning)
 // RETURNS an array which consists of [board evaluation after search depth if next best move played, board board after next best move]
-export function nextBestMove(depth, fen, player, alpha, beta) {
+function nextBestMove(depth, fen, player, alpha, beta) {
   const board = new Chess(fen);
   if (board.isGameOver()) {
     if (board.isStalemate() || board.isThreefoldRepetition()) {

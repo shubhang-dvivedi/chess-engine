@@ -1,3 +1,4 @@
+"use client";
 import HumanVsAI from "@/components/HumanVsAI"
 
 const White = () => {
