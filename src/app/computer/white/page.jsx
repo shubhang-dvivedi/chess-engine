@@ -7,4 +7,4 @@ const White = () => {
   )
 }
 
-export default White
+export default White;
