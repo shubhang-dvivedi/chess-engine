@@ -1,6 +1,6 @@
 # YACS - Yet Another Chess Website
 
-YACS is a simple, work in progress chess website built using Next.js and Tailwind CSS, bringing together the power of the Chess.js library for rules and Chessboard.jsx react component for the board interface. This project offers a user-friendly experience for chess enthusiasts to play against our own AI or with a friend.
+YACS is a simple, work in progress chess website built using Next.js and Tailwind CSS, bringing together the power of the Chess.js library for rules and Chessboard.jsx react component for the board interface. This project offers a user-friendly experience for chess enthusiasts to play against our very own AI or with a friend.
 
 ![YACS](https://github.com/shubhang-dvivedi/chess-engine/assets/89228525/89b6f10b-26e9-4238-9ff0-1ab16629c76a)
 
