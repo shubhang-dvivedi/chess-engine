@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# YACS - Yet Another Chess Website
+
+YACS is a simple, work in progress chess website built using Next.js and Tailwind CSS, bringing together the power of the Chess.js library for rules and Chessboard.jsx react component for the board interface. This project offers a user-friendly experience for chess enthusiasts to play against our own AI or with a friend.
+
+![YACS](https://github.com/shubhang-dvivedi/chess-engine/assets/89228525/89b6f10b-26e9-4238-9ff0-1ab16629c76a)
+
+## Key Features
+
+- **Play Against Computer:** Challenge yourself by playing against a powerful computer AI.
+
+![PvC](https://github.com/shubhang-dvivedi/chess-engine/assets/89228525/270163ed-68ff-439e-b179-1788331b0f1f)
+
+- **Pass & Play Mode:** Enjoy the classic chess experience with friends or family in a "Pass & Play" mode, where you can take turns playing on the same device.
+
+![PnP](https://github.com/shubhang-dvivedi/chess-engine/assets/89228525/943a2644-098b-4056-a2a9-b474e752c0aa)
+
+
+## Technologies Used
+
+- **Next.js:** A powerful and server-rendered React framework that optimizes performance and simplifies development.
+
+- **Tailwind CSS:** A utility-first CSS framework that enables rapid and efficient styling of components.
+
+- **Chess.js:** A JavaScript chess library that provides essential chess functionalities, such as legal moves generation, game validation, and more.
+
+- **Chessboard.jsx:** A React-based chessboard component for creating a visually appealing and interactive chessboard interface.
+
+## Upcoming Features 
+
+- **Openings database integration**: Enhancing the AI's ability by feeding it openings data from thousands of high level games.
+
+- **Time control:** Adding timers to limit the duration of games.
+
+- **Play on different devices:** An additional human vs human mode that allows two players to play a game from different devices.
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the Repository:**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+   ```
+   git clone https://github.com/shubhang-dvivedi/chess-engine.git
+   cd chess-engine
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install Dependencies:**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+   ```
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. **Run the Development Server:**
 
-## Learn More
+   ```
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+   The website will be accessible at `http://localhost:3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+YACS is a work in progress, developed by Shubhang Dvivedi and Jeet T, inspired by their passion for chess and the desire to offer an enjoyable and accessible platform for chess enthusiasts. Be sure to check in periodically for new updates!
