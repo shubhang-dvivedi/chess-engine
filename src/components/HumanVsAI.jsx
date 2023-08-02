@@ -111,7 +111,7 @@ const HumanVsAI = ({ playAs }) => {
         dropSquareStyle={{
           boxShadow: "inset 0 0 1px 4px green",
         }}
-        orientation={orient}
+        orientation={orient}  
         width={400}
       />
     </div>
